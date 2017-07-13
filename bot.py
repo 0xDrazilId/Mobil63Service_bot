@@ -18,7 +18,7 @@ def repeat_all_messages(message):
 		print("Connection error: {}".format(err))
 		conn.close()
 
-	sql = "SELECT `note` from `application` WHERE id = " + message.text 
+	sql = "SELECT `status`, `note` from `application` WHERE id = " + message.text 
 	    
 	try:
 		cur = conn.cursor(MySQLdb.cursors.DictCursor)
@@ -27,7 +27,9 @@ def repeat_all_messages(message):
 		data = cur.fetchall()
 	except MySQLdb.Error as err:
 		print("Query error: {}".format(err))
-	bot.send_message(message.chat.id, data[0]['note'])
+
+	result = "📌Номер квитанции:\t" + message.text + "\n\n🔧Cтатус ремонта:\t" + data[0]['status'] + "\n\n📝Комментарий:\t" + data[0]['note']
+	bot.send_message(message.chat.id, result)
 
 if __name__ == '__main__':
     bot.polling(none_stop=True)
