@@ -40,7 +40,7 @@ def repeat_all_messages(message):
 			except MySQLdb.Error as err:
 				print("Query error: {}".format(err))
 
-			result = "📌 Номер квитанции → " + message.text + "\n📱 Аппарат → "+ data[0]['device'] + "\n🔧 Статус ремонта → " + data[0]['status'] + "\n🗓Будет готов → " + str(data[0]['deadline']) + "\n📝 Комментарий → " + data[0]['note']
+			result = "📌 Номер квитанции → " + message.text + "\n📱 Аппарат → "+ data[0]['device'] + "\n🔧 Статус ремонта → " + data[0]['status'] + "\n🕙Будет готов → " + str(data[0]['deadline']) + "\n📝 Комментарий → " + data[0]['note']
 			bot.send_message(message.chat.id, result)
 	else:
 		bot.send_message(message.chat.id, "Неверный формат!\nВведите номер квитанции без точек, тире и прочих знаков: ") 
