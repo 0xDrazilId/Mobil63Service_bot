@@ -46,7 +46,7 @@ def notext(message):
 def answer_message(message):
 	if (message.text.isdecimal()): #если введенный текст = десятичное число
 		if(int(message.text) > LAST_BASE_ID[0]['id'] or int(message.text) < FIRST_BASE_ID[0]['id']): #если не входит в радиус допустимых значений
-			bot.send_message(message.chat.id, "🤷‍♂️ Извините, вашей заявки нет в базе либо число слишком большое")
+			bot.send_message(message.chat.id, "🤷‍♂️ Такой заявки нет в базе. Проверьте номер и попробуйте еще раз: ")
 		else: #если входит в радиус
 			sql = "SELECT `status`, `note`, `device`, `deadline` from `application` WHERE id = " + message.text #экранировать не нужно, есть проверка на текст
 			try:
