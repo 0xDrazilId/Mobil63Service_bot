@@ -12,7 +12,7 @@ def start_conversation(message):
 @bot.message_handler(content_types=["text"])
 def repeat_all_messages(message):
 	try:
-		conn = MySQLdb.connect(host="localhost", user="root", passwd="1234", db="mobilservice", charset="utf8" )
+		conn = MySQLdb.connect(host=config.dbhost, user=config.dbuser, passwd=config.dbpasswd, db=config.dbname, charset=config.dbcharset)
 
 	except MySQLdb.Error as err:
 		print("Connection error: {}".format(err))
