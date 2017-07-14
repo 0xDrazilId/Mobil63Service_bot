@@ -42,7 +42,8 @@ def notext(message):
 def notext(message):
 	bot.send_message(message.chat.id, "😊Классный стикер!\nЕсли вы хотите свой стикерпак, разработчик этого бота может вам его нарисовать\n👍Обращайтесь - @feraf")	
 
-@bot.message_handler(content_types=["text"]) #если прислали текст
+#если прислали текст
+@bot.message_handler(content_types=["text"]) 
 def answer_message(message):
 	if (message.text.isdecimal()): #если введенный текст = десятичное число
 		if(int(message.text) > LAST_BASE_ID[0]['id'] or int(message.text) < FIRST_BASE_ID[0]['id']): #если не входит в радиус допустимых значений
