@@ -49,7 +49,7 @@ def answer_message(message):
 		if(int(message.text) > LAST_BASE_ID[0]['id'] or int(message.text) < FIRST_BASE_ID[0]['id']): #если не входит в радиус допустимых значений
 			bot.send_message(message.chat.id, "🤷‍♂️ Такой заявки нет в базе. Проверьте номер и попробуйте еще раз: ")
 		else: #если входит в радиус
-			sql = "SELECT `status`, `note`, `device`, `deadline` from `application` WHERE id = " + message.text #экранировать не нужно, есть проверка на текст
+			sql = "SELECT `status`, `worked`, `device`, `deadline` from `application` WHERE id = " + message.text #экранировать не нужно, есть проверка на текст
 			try:
 				cur = conn.cursor(MySQLdb.cursors.DictCursor) #подключаемся второй раз чтобы выполнить запрос
 				cur.execute(sql)
@@ -57,7 +57,7 @@ def answer_message(message):
 			except MySQLdb.Error as err:
 				print("Query error: {}".format(err))
 
-			result = "📌 Номер квитанции → " + message.text + "\n📱 Аппарат → "+ data[0]['device'] + "\n🔧 Статус ремонта → " + data[0]['status'] + "\n🕙Будет готов → " + str(data[0]['deadline']) + "\n📝 Комментарий → " + data[0]['note']
+			result = "📌 Номер квитанции → " + message.text + "\n📱 Аппарат → "+ data[0]['device'] + "\n🔧 Статус ремонта → " + data[0]['status'] + "\n🕙Будет готов → " + str(data[0]['deadline']) + "\n📝 Комментарий → " + data[0]['worked']
 			bot.send_message(message.chat.id, result) #выводим всё красиво
 	else:#если прислали что-то кроме цифр
 		bot.send_message(message.chat.id, "⚠️ Неверный формат!\nВведите номер квитанции без точек, тире и прочих знаков: ") 
